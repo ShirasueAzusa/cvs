@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cvs.dao.sysUser.SysUserMapper">
+    <!-- 当数据库中的字段信息与对象的属性不一致时需要通过resultMap来映射 -->
+    <resultMap type="sysUser" id="SysUserResult">
+        <result property="roleIdName" column="roleName"/>
+    </resultMap>
+    <insert id="add" parameterType="sysUser">
+        insert into t_sys_user (account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime)
+        values (#{account}, #{realName}, #{password}, #{sex}, #{birthday}, #{phone}, #{address}, #{roleId}, #{createdUserId}, #{createdTime})
+    </insert>
+    <!-- 查询用户列表 -->
+    <select id="selectSysUserList" parameterType="sysUser" resultMap="SysUserResult">
+        select u.*, roleName
+        from t_sys_user u,
+             t_sys_role r
+        where u.roleId = r.id
+          and u.roleId = #{roleId}
+          and u.realName like concat('%', #{realName}, '%')
+    </select>
+</mapper>
