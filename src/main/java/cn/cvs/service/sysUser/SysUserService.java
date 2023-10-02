@@ -1,4 +1,4 @@
-package cn.cvs.service;
+package cn.cvs.service.sysUser;
 
 import cn.cvs.pojo.SysUser;
 

@@ -4,8 +4,10 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cvs.dao.supplier.SupplierMapper">
     <insert id="insert" parameterType="supplier">
-        INSERT INTO t_supplier(supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime) VALUES (#{supCode}, #{supName}, #{supDesc}, #{supContact}, #{supPhone}, #{supAddress}, #{supFax}, #{createdUserId}, #{createdTime})
+        INSERT INTO t_supplier(supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime)
+        VALUES (#{supCode}, #{supName}, #{supDesc}, #{supContact}, #{supPhone}, #{supAddress}, #{supFax}, #{createdUserId}, #{createdTime})
     </insert>
+
     <update id="update" parameterType="supplier">
         UPDATE t_supplier
         <set>
@@ -24,34 +26,53 @@
         </set>
         WHERE id = #{id}
     </update>
+
     <delete id="delete" parameterType="int">
-        DELETE FROM t_supplier WHERE id = #{id}
+        DELETE
+        FROM t_supplier
+        WHERE id = #{id}
     </delete>
+
     <select id="count" resultType="int">
-        select count(1) from t_supplier
+        select count(1)
+        from t_supplier
     </select>
+
     <select id="getSupplierList" resultType="Supplier">
         SELECT id, supCode, supName, supContact, supPhone, supFax FROM t_supplier
         <where>
             <choose>
                 <when test="supCode != null and supCode != ''">
-                    AND supCode LIKE CONCAT('%', #{supCode}, '%')
+                    supCode LIKE CONCAT('%', #{supCode}, '%')
                 </when>
                 <when test="supName != null and supName != ''">
-                    AND supName LIKE CONCAT('%', #{supName}, '%')
+                    supName LIKE CONCAT('%', #{supName}, '%')
                 </when>
                 <when test="supContact">
-                    AND supContact LIKE CONCAT('%', #{supContact}, '%')
+                    supContact LIKE CONCAT('%', #{supContact}, '%')
                 </when>
                 <otherwise>
-                    AND createdTime = #{createdTime}
+                    createdTime = #{createdTime}
                 </otherwise>
             </choose>
         </where>
     </select>
+
     <select id="getSupplierListBySupId" resultMap="getSupplierList">
-        SELECT s.id, s.supCode, s.supName, s.supContact, s.supPhone, sr.srCode, sr.goodsName, sr.totalAmount, sr.payStatus FROM t_storage_record sr INNER JOIN t_supplier s ON sr.supplierId = s.id WHERE s.id = #{id}
+        SELECT s.id,
+               s.supCode,
+               s.supName,
+               s.supContact,
+               s.supPhone,
+               sr.srCode,
+               sr.goodsName,
+               sr.totalAmount,
+               sr.payStatus
+        FROM t_storage_record sr
+                 INNER JOIN t_supplier s ON sr.supplierId = s.id
+        WHERE s.id = #{id}
     </select>
+
     <resultMap id="getSupplierList" type="supplier">
         <id property="id" column="id"/>
         <collection property="storageRecordList" ofType="storageRecord">

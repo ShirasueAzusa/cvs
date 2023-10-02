@@ -1,7 +1,7 @@
 package cn.cvs.dao.sysUser;
 
 import cn.cvs.pojo.SysUser;
-import cn.cvs.service.SysUserService;
+import cn.cvs.service.sysUser.SysUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
@@ -19,11 +19,13 @@ public class SysUserTest {
     private final Logger logger = LogManager.getLogger(SysUserTest.class);
 
     @Autowired
-    private ApplicationContext ctx;
+    private ApplicationContext context;
+
+    SysUserService userService = (SysUserService) context.getBean("sysUserService");
 
     @Test
     public void testGetUserList() {
-        SysUserService userService = (SysUserService) ctx.getBean("sysUserService");
+
         List<SysUser> userList;
         SysUser userCondition = new SysUser();
         userCondition.setRealName("赵");
@@ -43,7 +45,7 @@ public class SysUserTest {
 
     @Test
     public void testAddUser() {
-        SysUserService userService = (SysUserService) ctx.getBean("sysUserService");
+        SysUserService userService = (SysUserService) context.getBean("sysUserService");
 
         SysUser user = new SysUser();
         //···

@@ -22,5 +22,26 @@ public class SysUser implements java.io.Serializable {
     private Integer updatedUserId;  //更新者
     private Date updatedTime;       //更新时间
     private Integer age;            //年龄
-    private String roleIdName;      //角色名称
+    private String roleName;        //角色名称
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", realName='" + realName + '\'' +
+                ", password='" + password + '\'' +
+                ", sex=" + sex +
+                ", birthday=" + birthday +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", roleId=" + roleId +
+                ", createdUserId=" + createdUserId +
+                ", createdTime=" + createdTime +
+                ", updatedUserId=" + updatedUserId +
+                ", updatedTime=" + updatedTime +
+                ", age=" + age +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
 }
