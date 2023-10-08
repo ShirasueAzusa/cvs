@@ -11,14 +11,14 @@
     <update id="update" parameterType="sysRole">
         UPDATE t_sys_role
         <set>
-            <if test="roleName != null || roleName != ''">
+            <if test="roleName != null and roleName != ''">
                 roleName = #{roleName},
             </if>
-            <if test="updatedUserId != null">
-                updatedUserId = #{updatedUserId},
+            <if test="updateUserId != null">
+                updatedUserId = #{updateUserId},
             </if>
-            <if test="updatedTime != null">
-                updatedTime = #{updatedTime}
+            <if test="updateTime != null">
+                updatedTime = #{updateTime}
             </if>
         </set>
         WHERE id = #{id}
@@ -27,7 +27,7 @@
     <delete id="delete" parameterType="int">
         DELETE sr, su
         FROM t_sys_role sr
-                 JOIN t_sys_user su ON sr.id = su.roleId
+                 LEFT JOIN t_sys_user su ON sr.id = su.roleId
         WHERE sr.id = #{id}
     </delete>
 

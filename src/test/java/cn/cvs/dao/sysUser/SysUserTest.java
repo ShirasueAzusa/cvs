@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -18,37 +17,28 @@ import java.util.List;
 public class SysUserTest {
     private final Logger logger = LogManager.getLogger(SysUserTest.class);
 
-    @Autowired
-    private ApplicationContext context;
+    private SysUserService userService;
 
-    SysUserService userService = (SysUserService) context.getBean("sysUserService");
+    @Autowired
+    public void setUserService(SysUserService userService) {
+        this.userService = userService;
+    }
 
     @Test
     public void testGetUserList() {
-
         List<SysUser> userList;
         SysUser userCondition = new SysUser();
         userCondition.setRealName("赵");
         userCondition.setRoleId(2);
         userList = userService.getList(userCondition);
 
-        for (SysUser userResult : userList) {
-            logger.debug("testGetUserList "
-                    + "account: " + userResult.getAccount()
-                    + " and realName: " + userResult.getRealName()
-                    + " and roleId: " + userResult.getRoleId()
-                    + " and roleName: " + userCondition.getRealName()
-                    + " and address: " + userResult.getAddress()
-            );
-        }
+        for (SysUser userResult : userList)
+            logger.debug("testGetUserList\n" + userResult.toString());
     }
 
     @Test
     public void testAddUser() {
-        SysUserService userService = (SysUserService) context.getBean("sysUserService");
-
         SysUser user = new SysUser();
-        //···
         boolean result = userService.add(user);
         logger.debug("testAdd result: " + result);
     }

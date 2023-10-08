@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -20,10 +19,12 @@ import java.util.List;
 class SupplierMapperTest {
     private final Logger logger = LogManager.getLogger(getClass());
 
-    @Autowired
-    private ApplicationContext context;
+    SupplierService service;
 
-    SupplierService service = (SupplierService) context.getBean("SupplierService");
+    @Autowired
+    public void setService(SupplierService service) {
+        this.service = service;
+    }
 
     @Test
     void count() {
@@ -32,7 +33,7 @@ class SupplierMapperTest {
 
     @Test
     void getSupplierList() {
-        List<Supplier> supplierList = service.getSupplierList(null, null, null, null);
+        List<Supplier> supplierList = service.getSupplierList(null, null, null, "2014-11-21 12:51:11");
 
         if (supplierList != null) {
             for (Supplier supplier : supplierList) {
@@ -60,7 +61,7 @@ class SupplierMapperTest {
     @Test
     void testUpdate() {
         Supplier supplier = new Supplier();
-        supplier.setId(16);
+        supplier.setId(18);
         supplier.setSupName("supplierNewName");
         supplier.setUpdatedUserId(1);
         supplier.setUpdatedTime(new Date());
@@ -70,7 +71,7 @@ class SupplierMapperTest {
 
     @Test
     void testDelete() {
-        logger.debug("testDelete delete: " + service.delete(16));
+        logger.debug("testDelete delete: " + service.delete(18));
     }
 
     @Test

@@ -11,9 +11,15 @@
     <select id="selectSysUserList" parameterType="sysUser" resultType="sysUser">
         select u.*, roleName
         from t_sys_user u,
-             t_sys_role r
-        where u.roleId = r.id
-          and u.roleId = #{roleId}
-          and u.realName like concat('%', #{realName}, '%')
+        t_sys_role r
+        <where>
+            u.roleId = r.id
+            <if test="sysUser.roleId != null">
+                and u.roleId = #{sysUser.roleId}
+            </if>
+            <if test="sysUser.realName != null">
+                and u.realName like concat('%', #{sysUser.realName}, '%')
+            </if>
+        </where>
     </select>
 </mapper>

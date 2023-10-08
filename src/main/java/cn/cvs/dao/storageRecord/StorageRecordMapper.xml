@@ -3,22 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cvs.dao.storageRecord.StorageRecordMapper">
-    <select id="getStorageRecordList" resultMap="storageRecordList">
-        SELECT srCode, goodsName, supplierId, totalAmount, payStatus, sr.createdTime, supCode, supName FROM t_storage_record sr INNER JOIN t_supplier s ON sr.supplierId = s.id
-        <where>
-            supplierId in
-            <foreach collection="supplierIdMap" item="item" open="(" separator="," close=")">
-                #{item}
-            </foreach>
-        </where>
+    <select id="getStorageRecordList" resultMap="storageRecordList" parameterType="list">
+        SELECT srCode, goodsName, supplierId, totalAmount, payStatus, sr.createdTime, supCode, supName
+        FROM t_storage_record sr
+        INNER JOIN t_supplier s ON sr.supplierId = s.id
+        WHERE supplierId IN
+        <foreach collection="supplierIdList" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
-    <resultMap id="storageRecordList" type="storageRecord">
+
+    <resultMap id="storageRecordList" type="StorageRecord">
         <id property="supplierId" column="supplierId"/>
         <result property="supplierName" column="supName"/>
-        <association property="supplier" javaType="supplier">
+        <association property="supplier" javaType="Supplier">
             <id property="id" column="id"/>
             <result property="supCode" column="supCode"/>
             <result property="supName" column="supName"/>
         </association>
     </resultMap>
+
 </mapper>

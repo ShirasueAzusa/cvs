@@ -39,7 +39,7 @@
     </select>
 
     <select id="getSupplierList" resultType="Supplier">
-        SELECT id, supCode, supName, supContact, supPhone, supFax FROM t_supplier
+        SELECT id, supCode, supDesc, supName, supContact, supPhone, supFax FROM t_supplier
         <where>
             <choose>
                 <when test="supCode != null and supCode != ''">
@@ -48,7 +48,7 @@
                 <when test="supName != null and supName != ''">
                     supName LIKE CONCAT('%', #{supName}, '%')
                 </when>
-                <when test="supContact">
+                <when test="supContact != null and supContact != ''">
                     supContact LIKE CONCAT('%', #{supContact}, '%')
                 </when>
                 <otherwise>

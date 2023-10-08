@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -19,26 +18,28 @@ import java.util.List;
 class SysRoleMapperTest {
     private final Logger logger = LogManager.getLogger(getClass());
 
-    @Autowired
-    private ApplicationContext context;
+    private SysRoleService service;
 
-    SysRoleService service = (SysRoleService) context.getBean("sysRoleService");
+    @Autowired
+    public void setService(SysRoleService service) {
+        this.service = service;
+    }
 
     @Test
     void add() {
         SysRole sysRole = new SysRole();
         sysRole.setCode("testCode");
         sysRole.setRoleName("testName");
-        sysRole.setCreatedUserId(1);
+        sysRole.setCreatedUserId(5);
         sysRole.setCreatedTime(new Date());
-        
+
         logger.debug("result: {}", service.add(sysRole));
     }
 
     @Test
     void update() {
         SysRole sysRole = new SysRole();
-        sysRole.setId(1);
+        sysRole.setId(5);
         sysRole.setCode("testCode");
         sysRole.setRoleName("testName");
         sysRole.setUpdateUserId(1);
@@ -49,7 +50,7 @@ class SysRoleMapperTest {
 
     @Test
     void delete() {
-        logger.debug("result: {}", service.delete(1));
+        logger.debug("result: {}", service.delete(6));
     }
 
     @Test
