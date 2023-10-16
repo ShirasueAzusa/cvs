@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cvs.mapper.supplier.SupplierMapper">
+
+    <select id="selectAll" resultType="supplier">
+        select * from t_supplier
+        <where>
+            <if test="supCode!=null and supCode!=''">
+                and supCode like concat('%',#{supCode},'%')
+            </if>
+            <if test="supName!=null and supName!=''">
+                and supName like concat('%',#{supName},'%')
+            </if>
+        </where>
+        limit #{pageBegin},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) from t_supplier
+        <where>
+            <if test="supCode!=null and supCode!=''">
+                and supCode like concat('%',#{supCode},'%')
+            </if>
+            <if test="supName!=null and supName!=''">
+                and supName like concat('%',#{supName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

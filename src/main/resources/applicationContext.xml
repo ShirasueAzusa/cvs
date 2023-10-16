@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context
-       https://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/tx
-       https://www.springframework.org/schema/tx/spring-tx.xsd">
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:property-placeholder location="classpath:database.properties"/>
 
@@ -25,14 +27,31 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.cvs.dao"/>
+        <property name="basePackage" value="cn.cvs.mapper"/>
     </bean>
 
+    <!--开启注解扫描器  spring ioc注解支持-->
     <context:component-scan base-package="cn.cvs.service"/>
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <!--配置事务管理这-->
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <tx:annotation-driven/>
+    <!--配置事务增强的属性-->
+    <tx:advice transaction-manager="transactionManager" id="txAdvice">
+        <tx:attributes>
+            <tx:method name="insert*" isolation="DEFAULT" propagation="REQUIRED" timeout="-1" read-only="false"/>
+            <tx:method name="add*" isolation="DEFAULT" propagation="REQUIRED" timeout="-1" read-only="false"/>
+            <tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" timeout="-1" read-only="false"/>
+            <tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" timeout="-1" read-only="false"/>
+            <tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" timeout="-1" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--将事务增强对象织入到目的方法-->
+    <aop:config>
+        <aop:pointcut id="p1" expression="execution(* cn.cvs.service..*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="p1"/>
+    </aop:config>
 </beans>
