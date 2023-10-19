@@ -309,7 +309,7 @@ var $dp, WdatePicker;
             if ($dp.status == 0) {
                 $dp.status = 1;
                 K({el: {innerHTML: ""}}, true)
-            } else return
+            }
         } else if (J.eCont) {
             J.eCont = $dp.$(J.eCont);
             $dp.flatCfgs.push(J);
@@ -381,7 +381,7 @@ var $dp, WdatePicker;
         if (!$dp.dd || $dp.eCont || ($dp.lang && $dp.realLang && $dp.realLang.name != $dp.lang && $dp.getLangIndex && $dp.getLangIndex($dp.lang) >= 0)) {
             if ($dp.dd && !$dp.eCont) V[O].body.removeChild($dp.dd);
             if (_.$dpPath == "") F(A);
-            var B = "<iframe style=\"width:1px;height:1px\" src=" + _.$dpPath + "\"My97DatePicker.htm\" frameborder=\"0\" border=\"0\" scrolling=\"no\"></iframe>";
+            var B = "<iframe style=\"width:1px;height:1px\" src=\"" + _.$dpPath + "My97DatePicker.htm\" frameborder=\"0\" border=\"0\" scrolling=\"no\"></iframe>";
             if ($dp.eCont) {
                 $dp.eCont.innerHTML = B;
                 Z($dp.eCont.childNodes[0], Y)

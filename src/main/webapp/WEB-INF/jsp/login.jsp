@@ -18,7 +18,7 @@
         <h1>724便利店管理系统</h1>
     </header>
     <section class="loginCont">
-        <form class="loginForm" action="${pageContext.request.contextPath}/sysUser/toMain" name="actionForm" id="actionForm" method="post">
+        <form class="loginForm" action="${pageContext.request.contextPath}/sysUser/login" name="actionForm" id="actionForm" method="post">
             <div class="inputbox">
                 <label for="account">账号：</label>
                 <input type="text" class="input-text" id="account" name="account" placeholder="请输入账号" required/>

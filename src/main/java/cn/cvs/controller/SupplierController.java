@@ -27,15 +27,8 @@ public class SupplierController {
         //查询总记录数
         int totalSize = supplierService.selectCount(querySupCode, querySupName);
         //计算总页数
-        int totalPageCount = 0;
-        if (totalSize % pageSize == 0) {
-            //            1.6. 编写页面
-            //            1. 改造jsp/common/head.jsp中菜单里的“用户管理”链接为
-            //            2. 改造jsp/sysUser/list.jsp查询表单action的提交路劲
-            totalPageCount = totalSize / pageSize;
-        } else {
-            totalPageCount = totalSize / pageSize + 1;
-        }
+        int totalPageCount = totalSize / pageSize;
+        if (totalSize % pageSize != 0) totalPageCount += 1;
 
         //控制首页和尾页
         if (pageIndex >= totalPageCount) {
@@ -50,7 +43,6 @@ public class SupplierController {
         model.addAttribute("currentPageNo", pageIndex);
         model.addAttribute("totalPageCount", totalPageCount);
         model.addAttribute("supplierList", list);
-        
 
         //数据回显
         model.addAttribute("querySupCode", querySupCode);

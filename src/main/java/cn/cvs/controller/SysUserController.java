@@ -46,7 +46,6 @@ public class SysUserController {
      */
     @RequestMapping("/login")
     public String doLogin(String account, String password, HttpServletRequest request) {
-
         SysUser sysUser = sysUserService.login(account, password);
         if (null != sysUser) {
             request.getSession().setAttribute(Constants.USER_SESSION, sysUser);
@@ -163,8 +162,8 @@ public class SysUserController {
     /**
      * 跳转到修改用户页面
      */
-    @GetMapping("/toUpdate")
-    public String toUpdate(Integer uid, Model model) {
+    @GetMapping("/toUpdate/{uid}")
+    public String toUpdate(@PathVariable Integer uid, Model model) {
         SysUser sysUser = sysUserService.selectById(uid);
         model.addAttribute(sysUser);
         return "sysUser/update";
