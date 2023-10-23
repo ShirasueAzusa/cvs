@@ -8,7 +8,7 @@
         <span>用户管理页面 >> 用户添加页面</span>
     </div>
     <div class="supplierAdd">
-        <form id="userForm" name="userForm"  method="post" action="${pageContext.request.contextPath }/sysUser/add">
+        <form id="userForm" name="userForm" enctype="multipart/form-data"  method="post" action="${pageContext.request.contextPath }/sysUser/add">
             <!--div的class 为error是验证错误，ok是验证成功-->
             <div>
                 <label for="account">账号：</label>
@@ -64,7 +64,7 @@
                 </select>
                 <font color="red"></font>
             </div>
-            <%--<div>
+            <div>
                 <input type="hidden" id="errorinfo" value="${uploadFileError}"/>
                 <label for="idPic">证件照</label>
                 <input type="file" name="idPic" id="idPic"/>
@@ -75,7 +75,7 @@
                 <label for="workPic">工作证照片：</label>
                 <input type="file" name="workPic" id="workPic"/>
                 <font color="red"></font>
-            </div>--%>
+            </div>
             <div class="supplierAddBtn">
                 <input type="button" name="add" id="add" value="保存" >
                 <input type="button" id="back" name="back" value="返回" >

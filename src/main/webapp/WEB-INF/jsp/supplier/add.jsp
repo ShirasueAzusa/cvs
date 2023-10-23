@@ -8,30 +8,30 @@
         <span>供货商管理页面 >> 供货商添加页面</span>
     </div>
     <div class="supplierAdd">
-        <form id="supplierForm" name="supplierForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/sys/supplier/add">
+        <form id="supplierForm" name="supplierForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/supplier/add">
             <input type="hidden" name="method" value="add">
             <!--div的class 为error是验证错误，ok是验证成功-->
             <div class="">
                 <label for="supCode">供货商编码：</label>
                 <input type="text" name="supCode" id="supCode" value="">
                 <!-- 放置提示信息 -->
-                <font color="red"></font>
+                <font color="red"></font><i style="color: red" class="err">${error1}</i>
             </div>
             <div>
                 <label for="supName">供货商名称：</label>
                 <input type="text" name="supName" id="supName" value="">
-                <font color="red"></font>
+                <font color="red"></font><i style="color: red" class="err">${error2}</i>
             </div>
             <div>
                 <label for="supContact">联系人：</label>
                 <input type="text" name="supContact" id="supContact" value="">
-                <font color="red"></font>
+                <font color="red"></font><i style="color: red" class="err">${error3}</i>
 
             </div>
             <div>
                 <label for="supPhone">联系电话：</label>
                 <input type="text" name="supPhone" id="supPhone" value="">
-                <font color="red"></font>
+                <font color="red"></font><i style="color: red" class="err">${error4}</i>
             </div>
             <div>
                 <label for="supAddress">联系地址：</label>

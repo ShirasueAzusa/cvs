@@ -16,7 +16,7 @@
         <h1>724便利店管理系统</h1>
         <div class="publicHeaderR">
             <p><span style="color: #fff21b"> ${userSession.realName }</span> , 欢迎光临！</p>
-            <a href="${pageContext.request.contextPath }/sysUser/logout">登出</a>
+            <a href="${pageContext.request.contextPath }/logout">登出</a>
         </div>
     </header>
 	<!--时间-->

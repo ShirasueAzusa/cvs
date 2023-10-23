@@ -21,10 +21,8 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SysUser login(String account, String userPassword) {
         SysUser sysUser = sysUserMapper.selectByAccount(account);
-        if (null != sysUser) {
-            if (!sysUser.getPassword().equals(userPassword)) {
-                sysUser = null;
-            }
+        if (sysUser != null && !sysUser.getPassword().equals(userPassword)) {
+            sysUser = null;
         }
         return sysUser;
     }
@@ -55,5 +53,10 @@ public class SysUserServiceImpl implements SysUserService {
     public int update(SysUser sysUser) {
         sysUser.setUpdatedTime(new Date());
         return sysUserMapper.update(sysUser);
+    }
+
+    @Override
+    public SysUser selectByAccount(String account) {
+        return sysUserMapper.selectByAccount(account);
     }
 }

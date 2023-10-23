@@ -22,4 +22,19 @@ public interface SupplierMapper {
      * @return
      */
     int selectCount(@Param("supCode") String supCode, @Param("supName") String supName);
+
+    /**
+     * 添加
+     */
+    int insert(Supplier supplier);
+
+    /**
+     * 根据id查询
+     */
+    Supplier selectOne(@Param("id") Integer id);
+
+    /**
+     * 修改供货商信息
+     */
+    int update(Supplier supplier);
 }

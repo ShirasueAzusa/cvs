@@ -19,7 +19,7 @@
                     暂无
                 </c:when>
                 <c:otherwise>
-                    <img src="${supplier.companyLicPicPath}"/>
+                    <img src="../../${supplier.companyLicPicPath}" width="200" height="200"/>
                 </c:otherwise>
             </c:choose>
             </span></p>
@@ -30,7 +30,7 @@
                     暂无
                 </c:when>
                 <c:otherwise>
-                    <img src="${supplier.orgCodePicPath}"/>
+                    <img src="../../${supplier.orgCodePicPath}" width="200" height="200"/>
                 </c:otherwise>
             </c:choose>
             </span></p>

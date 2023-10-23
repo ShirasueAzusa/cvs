@@ -76,24 +76,24 @@ $(function(){
     account.bind("blur",function(){
         //ajax后台验证--account是否已存在
         //user.do?method=ucexist&account=**
-        // $.ajax({
-        //     type:"GET",//请求类型
-        //     url:path+"/sys/user/userExist",//请求的url
-        //     data:{account:account.val()},//请求参数
-        //     dataType:"json",//ajax接口（请求url）返回的数据类型
-        //     success:function(data){//data：返回数据（json对象）
-        //         if(data.exist == 1){//账号已存在，错误提示
-        //             validateTip(account.next(),{"color":"red"},imgNo + " 该用户账号已存在",false);
-        //         }else if(data.exist == 0){//账号可用，正确提示
-        //             validateTip(account.next(),{"color":"green"},imgYes+" 该账号可以使用",true);
-        //         }else if(data.exist == -1){//错误
-        //             validateTip(account.next(),{"color":"green"},imgNo + data.msg  ,true);
-        //         }
-        //     },
-        //     error:function(data){//当访问时候，404，500 等非200的错误状态码
-        //         validateTip(account.next(),{"color":"red"},imgNo+" 您访问的页面不存在",false);
-        //     }
-        // });
+        $.ajax({
+            type:"GET",//请求类型
+            url:path+"/sysUser/userExist",//请求的url
+            data:{account:account.val()},//请求参数
+            dataType:"json",//ajax接口（请求url）返回的数据类型
+            success:function(data){//data：返回数据（json对象）
+                if(data.exist == 1){//账号已存在，错误提示
+                    validateTip(account.next(),{"color":"red"},imgNo + " 该用户账号已存在",false);
+                }else if(data.exist == 0){//账号可用，正确提示
+                    validateTip(account.next(),{"color":"green"},imgYes+" 该账号可以使用",true);
+                }else if(data.exist == -1){//错误
+                    validateTip(account.next(),{"color":"green"},imgNo + data.msg  ,true);
+                }
+            },
+            error:function(data){//当访问时候，404，500 等非200的错误状态码
+                validateTip(account.next(),{"color":"red"},imgNo+" 您访问的页面不存在",false);
+            }
+        });
     }).bind("focus",function(){
         //显示友情提示
         validateTip(account.next(),{"color":"#666666"},"* 用户编码是您登录系统的账号",false);
@@ -166,9 +166,9 @@ $(function(){
 	});
 
 	addBtn.bind("click",function(){
-		/*if(account.attr("validateStatus") != "true"){
+		if(account.attr("validateStatus") != "true"){
 			account.blur();
-		}else */if(realName.attr("validateStatus") != "true"){
+		}else if(realName.attr("validateStatus") != "true"){
 			realName.blur();
 		}else if(password.attr("validateStatus") != "true"){
 			password.blur();

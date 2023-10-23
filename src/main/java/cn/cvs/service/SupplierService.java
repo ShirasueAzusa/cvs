@@ -8,19 +8,26 @@ import java.util.List;
 public interface SupplierService {
     /**
      * 查询供货商记录
-     *
-     * @param pageNo
-     * @param pageSize
-     * @return
      */
     List<Supplier> selectAll(int pageNo, int pageSize, String supCode, String supName);
 
     /**
      * 根据编码和名称查询记录数
-     *
-     * @param supCode
-     * @param supName
-     * @return
      */
     int selectCount(String supCode, String supName);
+
+    /**
+     * 添加
+     */
+    int insert(Supplier supplier);
+
+    /**
+     * 查询单个
+     */
+    Supplier selectOne(Integer id);
+
+    /**
+     * 修改供货商信息
+     */
+    int update(Supplier supplier);
 }

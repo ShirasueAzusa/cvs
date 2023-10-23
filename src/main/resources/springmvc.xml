@@ -21,6 +21,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--设置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
     <mvc:resources mapping="/statics/**" location="/statics/"/>
 
     <!--全局异常处理-->
@@ -31,4 +37,32 @@
             </props>
         </property>
     </bean>
+
+    <!--配置文件上传解析器-->
+    <!--<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <property name="maxInMemorySize" value="2048000"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>-->
+
+    <!-- 配置类型转换器工厂 -->
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <!-- 给工厂注入一个新的类型转换器 -->
+        <property name="converters">
+            <list>
+                <!-- 配置自定义类型转换器 -->
+                <bean class="cn.cvs.web.converter.String2DateConverter">
+                    <constructor-arg name="datePattern" value="yyyy-MM-dd"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置interceptors -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="cn/cvs/mapper/sysUser/**"/>
+            <bean class="cn.cvs.web.interceptor.SysInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

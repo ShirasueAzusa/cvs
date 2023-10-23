@@ -98,6 +98,17 @@ $(function(){
 				$("#supplierForm").submit();
 			}
 		}
+		/*let flag=true;
+		let err=document.getElementsByClassName("err");
+		for (let i = 0; i <err.length ; i++) {
+			if(err[i].innerHTML!=""){
+				flag=false;
+			}
+		}
+		if(flag){
+			$("#supplierForm").submit();
+		}*/
+		/*$("#supplierForm").submit();*/
 	});
 	
 	backBtn.on("click",function(){

@@ -47,15 +47,15 @@ $(function(){
 	 * bind、live、delegate
 	 * on
 	 */
+    // $(".viewUser").on("click",function(){
+    //     //将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
+    //     var obj = $(this);
+    //     window.location.href=path+"/sysUser/view/" + obj.attr("userid");
+    // });
     $(".viewUser").on("click",function(){
         //将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
         var obj = $(this);
-        window.location.href=path+"/sysUser/view?id=" + obj.attr("userid");
-    });
-    /*$(".viewUser").on("click",function(){
-        //将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
-        var obj = $(this);
-        /!*window.location.href=path+"/sys/user/view/"+ obj.attr("userid");*!/
+        /*window.location.href=path+"/sys/user/view/"+ obj.attr("userid");*/
         $.ajax({
             type:"GET",
             url:path+"/sysUser/" + obj.attr("userid") + "/view",
@@ -88,7 +88,7 @@ $(function(){
                 alert("error!");
             }
         });
-    });*/
+    });
 
 	$(".modifyUser").on("click",function(){
 		var obj = $(this);

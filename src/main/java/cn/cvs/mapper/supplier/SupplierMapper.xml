@@ -27,4 +27,33 @@
             </if>
         </where>
     </select>
+    <select id="selectOne" resultType="Supplier">
+        select * from t_supplier
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert">
+        insert into t_supplier(supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime, companyLicPicPath, orgCodePicPath)
+        values (#{supCode}, #{supName}, #{supDesc}, #{supContact}, #{supPhone}, #{supAddress}, #{supFax}, #{createdUserId}, #{createdTime}, #{companyLicPicPath}, #{orgCodePicPath})
+    </insert>
+    
+    <update id="update">
+        update t_supplier
+        <set>
+            <if test="supCode != null">supCode=#{supCode},</if>
+            <if test="supName != null">supName=#{supName},</if>
+            <if test="supDesc != null">supDesc=#{supDesc},</if>
+            <if test="supContact != null">supContact=#{supContact},</if>
+            <if test="supPhone != null">supPhone=#{supPhone},</if>
+            <if test="supAddress != null">supAddress=#{supAddress},</if>
+            <if test="supFax != null">supFax=#{supFax},</if>
+            <if test="updatedTime != null">updatedTime=#{updatedTime},</if>
+            <if test="updatedUserId != null">updatedUserId=#{updatedUserId},</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

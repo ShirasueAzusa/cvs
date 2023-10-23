@@ -309,7 +309,7 @@ var $dp, WdatePicker;
             if ($dp.status == 0) {
                 $dp.status = 1;
                 K({el: {innerHTML: ""}}, true)
-            }
+            } else return
         } else if (J.eCont) {
             J.eCont = $dp.$(J.eCont);
             $dp.flatCfgs.push(J);
